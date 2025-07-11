@@ -6,6 +6,7 @@ public class FruitManager : MonoBehaviour
     [Header("Elements")]
     [SerializeField] private GameObject fruitPrefab;
     [SerializeField] private LineRenderer fruitSpawnLine;
+    private GameObject currentFruit;
 
     [Header("Settings")]
     [SerializeField] private float fruitYSpawnPos;
@@ -45,18 +46,21 @@ public class FruitManager : MonoBehaviour
     {
         DisplayLine();
 
-        fruitSpawnLine.SetPosition(0, GetSpawnPosition());
-        fruitSpawnLine.SetPosition(1, GetSpawnPosition() + Vector2.down * 15);
+        PlaceLineClickedPosition();
+        SpawnFruit();
     }
 
     private void MouseDragCallBack()
     {
-        fruitSpawnLine.SetPosition(0, GetSpawnPosition());
-        fruitSpawnLine.SetPosition(1, GetSpawnPosition() + Vector2.down * 15);
+        PlaceLineClickedPosition();
+
+        currentFruit.transform.position = GetSpawnPosition();
+
     }
     private void MousUpCallBack()
     {
         HideLine();
+        currentFruit.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
     }
     private void SpawnFruit()
@@ -64,7 +68,7 @@ public class FruitManager : MonoBehaviour
         Vector2 spawnPosition = GetSpawnPosition();
 
 
-        Instantiate(fruitPrefab, spawnPosition, Quaternion.identity);
+        currentFruit = Instantiate(fruitPrefab, spawnPosition, Quaternion.identity);
     }
     private Vector2 GetClickPosition()
     {
@@ -76,6 +80,14 @@ public class FruitManager : MonoBehaviour
         clickedWorldPosition.y = fruitYSpawnPos;
         return clickedWorldPosition;
     }
+
+    private void PlaceLineClickedPosition()
+    {
+        fruitSpawnLine.SetPosition(0, GetSpawnPosition());
+        fruitSpawnLine.SetPosition(1, GetSpawnPosition() + Vector2.down * 15);
+    }
+
+
     private void HideLine()
     {
         fruitSpawnLine.enabled = false;
