@@ -786,7 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ded1bfff79e49528879e624f8199ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruitPrefab: {fileID: 164874864003213476, guid: f954856a4af7e4074953ec32a27033d0, type: 3}
+  fruitPrefab: {fileID: 6766933947843642735, guid: f954856a4af7e4074953ec32a27033d0, type: 3}
   fruitSpawnLine: {fileID: 453903353}
   fruitYSpawnPos: 3.5
   enableGizmos: 0

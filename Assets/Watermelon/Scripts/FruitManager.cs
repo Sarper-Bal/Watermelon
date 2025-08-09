@@ -4,12 +4,14 @@ public class FruitManager : MonoBehaviour
 {
 
     [Header("Elements")]
-    [SerializeField] private GameObject fruitPrefab;
+    [SerializeField] private Fruit fruitPrefab;
     [SerializeField] private LineRenderer fruitSpawnLine;
-    private GameObject currentFruit;
+    private Fruit currentFruit;
 
     [Header("Settings")]
     [SerializeField] private float fruitYSpawnPos;
+    private bool canControl;
+    private bool isControlling;
 
     [Header("Debug")]
     [SerializeField] private bool enableGizmos;
@@ -17,13 +19,15 @@ public class FruitManager : MonoBehaviour
 
     void Start()
     {
+        canControl = true;
         HideLine();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ManagePlayerInput();
+        if (canControl)
+            ManagePlayerInput();
     }
 
     private void ManagePlayerInput()
@@ -34,9 +38,19 @@ public class FruitManager : MonoBehaviour
         }
         else if (Input.GetMouseButton(0))
         {
-            MouseDragCallBack();
+            if (isControlling)
+            {
+                MouseDragCallBack();
+            }
+            else
+            {
+                MouseDownCallBack();
+            }
+
         }
-        else if (Input.GetMouseButtonUp(0))
+
+
+        else if (Input.GetMouseButtonUp(0) && isControlling)
         {
             MousUpCallBack();
         }
@@ -48,19 +62,27 @@ public class FruitManager : MonoBehaviour
 
         PlaceLineClickedPosition();
         SpawnFruit();
+
+        isControlling = true;
     }
 
     private void MouseDragCallBack()
     {
         PlaceLineClickedPosition();
 
-        currentFruit.transform.position = GetSpawnPosition();
+        currentFruit.MoveTo(new Vector2(GetSpawnPosition().x, fruitYSpawnPos));
 
     }
     private void MousUpCallBack()
     {
         HideLine();
-        currentFruit.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        currentFruit.EnablePhysics();
+
+        canControl = false;
+
+        StartControlTimer();
+
+        isControlling = false;
 
     }
     private void SpawnFruit()
@@ -97,6 +119,15 @@ public class FruitManager : MonoBehaviour
         fruitSpawnLine.enabled = true;
 
     }
+    private void StartControlTimer()
+    {
+        Invoke("StopControlTimer", 1);
+    }
+    private void StopControlTimer()
+    {
+        canControl = true;
+    }
+
 
 
 #if UNITY_EDITOR
