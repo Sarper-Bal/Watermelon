@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6766933947843642735}
   - component: {fileID: 3849877087179853421}
   m_Layer: 0
-  m_Name: Fruit_001
+  m_Name: 03_Cherry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164874864003213476}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -70,7 +70,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.0010260493}
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
 --- !u!50 &3298294437866259526
 Rigidbody2D:
@@ -111,6 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56a6a0759d2544c5aeb255598995a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  fruitType: 2
 --- !u!95 &3849877087179853421
 Animator:
   serializedVersion: 7
@@ -210,7 +212,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 0.5080935, b: 0.24705881, a: 1}
+  m_Color: {r: 0.041651852, g: 0.07179017, b: 0.6792453, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

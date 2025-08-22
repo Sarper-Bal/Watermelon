@@ -1,8 +1,17 @@
 using UnityEngine;
+using System;
 
 public class Fruit : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Elements")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    [Header("Data")]
+    [SerializeField] private FruitType fruitType;
+    private bool hasCollided;
+
+    [Header("Actions")]
+    public static Action<Fruit, Fruit> onCollsoionWithFruit;
     void Start()
     {
 
@@ -20,6 +29,36 @@ public class Fruit : MonoBehaviour
     public void EnablePhysics()
     {
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<Collider2D>().enabled = true;
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        hasCollided = true;
+
+        if (collision.collider.TryGetComponent(out Fruit otherFruit))
+        {
+            if (otherFruit.GetFruitType() != fruitType)
+                return;
+
+
+            onCollsoionWithFruit?.Invoke(this, otherFruit);
+
+
+
+        }
+    }
+    public FruitType GetFruitType()
+    {
+        return fruitType;
+    }
+    public Sprite GetSprite()
+    {
+        return spriteRenderer.sprite;
+    }
+    public bool HasCollided()
+    {
+        return hasCollided;
     }
 }
