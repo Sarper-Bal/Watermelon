@@ -11,6 +11,11 @@ public enum FruitType
     Orange,
     Watermelon
 
+}
 
-
+public enum GameState
+{
+    Menu,
+    Game,
+    GameOver
 }

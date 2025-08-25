@@ -10,9 +10,17 @@ public class MergeManager : MonoBehaviour
     [Header("Settings")]
     Fruit lastSender;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         Fruit.onCollsoionWithFruit += CollisionBetweenFruitsCallBack;
+    }
+    private void OnDestroy()
+    {
+        Fruit.onCollsoionWithFruit -= CollisionBetweenFruitsCallBack;
+    }
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
@@ -57,7 +65,7 @@ public class MergeManager : MonoBehaviour
     IEnumerator ResetLastSenderCoroutine()
     {
         yield return new WaitForEndOfFrame();
-        //  lastSender = null;
+        //    lastSender = null;
 
     }
 }

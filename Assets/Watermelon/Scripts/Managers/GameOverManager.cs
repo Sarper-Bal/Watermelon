@@ -90,6 +90,8 @@ public class GameOverManager : MonoBehaviour
     {
         Debug.LogError("Game Over");
         isGameOver = true;
+
+        GameManager.instance.SetGameOverState();
     }
 
 }
