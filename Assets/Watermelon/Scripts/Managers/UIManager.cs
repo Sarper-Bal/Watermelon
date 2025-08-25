@@ -63,11 +63,5 @@ public class UIManager : MonoBehaviour
         GameManager.instance.SetGameState();
         SetGame();
     }
-    public void NextButtonCallBack()
-    {
-        Debug.Log("Next");
-        SceneManager.LoadScene(0);
-
-    }
 
 }
